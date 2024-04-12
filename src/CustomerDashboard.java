@@ -49,6 +49,17 @@ public class CustomerDashboard extends JFrame {
     });
     image.add(makeOrder);
 
+    JButton exit = new JButton("Exit");
+    exit.setBounds(1000, 100, 200, 100);
+    exit.setFont(new Font("serif", Font.BOLD, 25));
+    exit.setForeground(Color.BLACK);
+    exit.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent ae) {
+        setVisible(false);
+      }
+    });
+    image.add(exit);
+
     setVisible(true);
 
     // // This is to create the flickering effect

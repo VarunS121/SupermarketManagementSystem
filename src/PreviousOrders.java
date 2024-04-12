@@ -56,19 +56,19 @@ public class PreviousOrders extends JFrame implements ActionListener {
     add(l1);
 
     JLabel l2 = new JLabel("Price");
-    l2.setBounds(300, 120, 100, 20);
+    l2.setBounds(390, 120, 100, 20);
     add(l2);
 
     JLabel l3 = new JLabel("Quantity");
-    l3.setBounds(500, 120, 100, 20);
+    l3.setBounds(630, 120, 100, 20);
     add(l3);
 
     JLabel l4 = new JLabel("BillDate");
-    l4.setBounds(500, 120, 100, 20);
+    l4.setBounds(870, 120, 100, 20);
     add(l4);
 
     JLabel l5 = new JLabel("PaymentMethod");
-    l5.setBounds(500, 120, 100, 20);
+    l5.setBounds(1110, 120, 130, 20);
     add(l5);
 
     orders = new JTable();

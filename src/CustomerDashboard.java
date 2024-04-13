@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 public class CustomerDashboard extends JFrame {
   // Creating a constructor
   CustomerDashboard() {
-    setBounds(100, 100, 1400, 600); // creating a frame
+    setBounds(100, 100, 1800, 1200); // creating a frame
     setLayout(null);
 
     // Adding the image to frame
     ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Icons/newCustomer.png"));
-    Image i2 = i1.getImage().getScaledInstance(1400, 600, Image.SCALE_DEFAULT);
+    Image i2 = i1.getImage().getScaledInstance(1800, 1200, Image.SCALE_DEFAULT);
     ImageIcon i3 = new ImageIcon(i2);
     JLabel image = new JLabel(i3);
-    image.setBounds(0, 0, 1400, 600);
+    image.setBounds(0, 0, 1800, 1200);
     add(image);
 
     // Adding text on the image

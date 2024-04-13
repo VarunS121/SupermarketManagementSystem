@@ -63,9 +63,16 @@ public class Login extends JFrame implements ActionListener {
         ResultSet rs = c.s.executeQuery(query);
         if (rs.next()) {
           setVisible(false);
-          new CustomerDashboard();
+          new EmployeeDashboard();
         } else {
-          JOptionPane.showMessageDialog(null, "invalid username or Password");
+          query = "select * from Customers where UserID = '" + user + "' and Password = '" + pass + "';";
+          rs = c.s.executeQuery(query);
+          if (rs.next()) {
+            setVisible(false);
+            new CustomerDashboard();
+          } else {
+            JOptionPane.showMessageDialog(null, "invalid username or Password");
+          }
         }
       } catch (Exception e) {
         e.printStackTrace();

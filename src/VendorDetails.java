@@ -4,20 +4,20 @@ import javax.swing.*;
 import java.sql.*;
 import net.proteanit.sql.*;
 
-public class CustomerDetails extends JFrame implements ActionListener {
+public class VendorDetails extends JFrame implements ActionListener {
   // Creating the UI
   JLabel text, selectText;
   JButton submit, back;
   JComboBox<String> selectBox;
   JTable orders;
 
-  CustomerDetails() {
+  VendorDetails() {
     setBounds(100, 100, 1800, 1200); // creating a frame
     setLayout(null); // This helps in customizing our layout
 
     getContentPane().setBackground(Color.WHITE); // This command is used to set the background of the frame to white
 
-    text = new JLabel("CUSTOMER DETAILS");
+    text = new JLabel("VENDOR DETAILS");
     text.setBounds(50, 25, 500, 50);
     text.setForeground(Color.BLACK);// choosing the colour of text
     text.setFont(new Font("serif", Font.BOLD, 40)); // choosing the font of text
@@ -131,6 +131,6 @@ public class CustomerDetails extends JFrame implements ActionListener {
   }
 
   public static void main(String[] args) {
-    new CustomerDetails(); // calling the object
+    new VendorDetails(); // calling the object
   }
 }

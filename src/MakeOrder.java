@@ -1,111 +1,378 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 
-public class MakeOrder extends JFrame implements ActionListener {
-  MakeOrder() {
-    setBounds(100, 100, 1400, 600); // creating a frame
-    setLayout(null); // This helps in customizing our layout
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
-    getContentPane().setBackground(Color.WHITE);
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
-    JLabel text = new JLabel("PLACE ORDERS");
-    text.setBounds(50, 25, 500, 50);
-    text.setForeground(Color.BLACK);// choosing the colour of text
-    text.setFont(new Font("serif", Font.BOLD, 25)); // choosing the font of text
-    getContentPane().add(text);// adding text to the frame
+import java.util.Arrays;
 
-    // Creating categories
-    JLabel category = new JLabel("Category");
-    category.setBounds(50, 75, 100, 30);
-    category.setForeground(Color.BLUE);
-    category.setFont(new Font("serif", Font.BOLD, 20));
-    getContentPane().add(category);
+/**
+ *
+ * @author nemo
+ */
+public class MakeOrder extends javax.swing.JFrame {
 
-    JLabel availableItems = new JLabel("Available Items");
-    availableItems.setFont(new Font("serif", Font.BOLD, 20));
-    availableItems.setForeground(Color.BLUE);
-    availableItems.setBounds(300, 75, 200, 30);
-    getContentPane().add(availableItems);
-
-    JLabel groceries = new JLabel("Groceries");
-    groceries.setForeground(Color.BLACK);
-    groceries.setFont(new Font("serif", Font.BOLD, 18));
-    groceries.setBounds(50, 110, 100, 30);
-    getContentPane().add(groceries);
-
-    JLabel lifeStyle = new JLabel("Lifestyle");
-    lifeStyle.setForeground(Color.BLACK);
-    lifeStyle.setFont(new Font("serif", Font.BOLD, 18));
-    lifeStyle.setBounds(50, 150, 100, 30);
-    getContentPane().add(lifeStyle);
-
-    JLabel sports = new JLabel("Sports and Health");
-    sports.setForeground(Color.BLACK);
-    sports.setFont(new Font("serif", Font.BOLD, 18));
-    sports.setBounds(50, 190, 150, 30);
-    getContentPane().add(sports);
-
-    // Creating dropdown boxes for them
-    JComboBox<String> groceriesBox = new JComboBox<>(new String[] { "Product 1", "Product 2", "Product 3" });
-    groceriesBox.setBounds(300, 110, 150, 30);
-    getContentPane().add(groceriesBox);
-
-    JComboBox<String> lifeStyleBox = new JComboBox<>(new String[] { "Product 1", "Product 2", "Product 3" });
-    lifeStyleBox.setBounds(300, 150, 150, 30);
-    getContentPane().add(lifeStyleBox);
-
-    JComboBox<String> sportsBox = new JComboBox<>(new String[] { "Product 1", "Product 2", "Product 3" });
-    sportsBox.setBounds(300, 190, 150, 30);
-    getContentPane().add(sportsBox);
-
-    // Creating Add Buttons
-    JButton groceriesButton = new JButton("Add");
-    groceriesButton.setBounds(500, 110, 100, 30);
-    groceriesButton.setForeground(Color.WHITE);
-    groceriesButton.setFont(new Font("serif", Font.BOLD, 18));
-    groceriesButton.setBackground(Color.BLACK);
-    getContentPane().add(groceriesButton);
-
-    JButton lifeStyleButton = new JButton("Add");
-    lifeStyleButton.setBounds(500, 150, 100, 30);
-    lifeStyleButton.setForeground(Color.WHITE);
-    lifeStyleButton.setFont(new Font("serif", Font.BOLD, 18));
-    lifeStyleButton.setBackground(Color.BLACK);
-    getContentPane().add(lifeStyleButton);
-
-    JButton sportsButton = new JButton("Add");
-    sportsButton.setBounds(500, 190, 100, 30);
-    sportsButton.setForeground(Color.WHITE);
-    sportsButton.setFont(new Font("serif", Font.BOLD, 18));
-    sportsButton.setBackground(Color.BLACK);
-    getContentPane().add(sportsButton);
-
-    // Creating Submit and Cancel Buttons
-    JButton submit = new JButton("Submit");
-    submit.setBounds(450, 500, 100, 30);
-    submit.setForeground(Color.WHITE);
-    submit.setFont(new Font("serif", Font.BOLD, 20));
-    submit.setBackground(Color.BLUE);
-    getContentPane().add(submit);
-
-    JButton cancel = new JButton("Cancel");
-    cancel.setBounds(750, 500, 100, 30);
-    cancel.setForeground(Color.WHITE);
-    cancel.setFont(new Font("serif", Font.BOLD, 20));
-    cancel.setBackground(Color.BLUE);
-    cancel.addActionListener(this);
-    getContentPane().add(cancel);
-    setVisible(true);
+  /**
+   * Creates new form MakeOrder
+   */
+  public MakeOrder() {
+    initComponents();
   }
 
-  public void actionPerformed(ActionEvent ae) {
-    setVisible(false);
-    new CustomerDashboard();
+  /**
+   * This method is called from within the constructor to initialize the form.
+   * WARNING: Do NOT modify this code. The content of this method is always
+   * regenerated by the Form Editor.
+   */
+  @SuppressWarnings("unchecked")
+  // <editor-fold defaultstate="collapsed" desc="Generated Code">
+  private void initComponents() {
+
+    makeOrder = new javax.swing.JLabel();
+    select = new javax.swing.JLabel();
+    itemDrop = new javax.swing.JComboBox<String>();
+    quantity = new javax.swing.JLabel();
+    quantitySelector = new javax.swing.JSpinner();
+    price = new javax.swing.JLabel();
+    priceItem = new javax.swing.JLabel();
+    addBtn = new javax.swing.JButton();
+    cart = new javax.swing.JLabel();
+    item1 = new javax.swing.JLabel();
+    grandTotal = new javax.swing.JLabel();
+    total = new javax.swing.JLabel();
+    itemsTable = new javax.swing.JTable();
+    jScrollPane1 = new JScrollPane();
+    backBtn = new JButton();
+    confirmBtn = new JButton();
+    paymentDrop = new javax.swing.JComboBox<>();
+    paymentLabel = new javax.swing.JLabel();
+    List<Integer> itemId = new ArrayList<Integer>();
+    List<String> finalQueries = new ArrayList<String>();
+    Random rand = new Random();
+    int billId = rand.nextInt(10000);
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+    try {
+      Conn c = new Conn();
+      String query = "select * from Products;";
+      ResultSet rs = c.s.executeQuery(query);
+      List<String> itemList = new ArrayList<String>();
+      List<Float> itemPriceList = new ArrayList<Float>();
+      while (rs.next()) {
+        itemList.add(rs.getString("ProductName"));
+        itemPriceList.add(rs.getFloat("SellingPrice"));
+        itemId.add(rs.getInt("ProductID"));
+      }
+      Object[] itemObjects = itemList.toArray();
+      itemStrings = Arrays.copyOf(itemObjects, itemObjects.length, String[].class);
+      itemObjects = itemPriceList.toArray();
+      itemPrices = new float[itemObjects.length];
+      for (int i = 0; i < itemObjects.length; i++) {
+        itemPrices[i] = (float) itemObjects[i];
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    makeOrder.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+    makeOrder.setText("MAKE ORDER");
+
+    select.setFont(new java.awt.Font("Liberation Sans", 0, 17)); // NOI18N
+    select.setText("Select Item");
+
+    itemDrop.setModel(
+        new javax.swing.DefaultComboBoxModel<String>(itemStrings));
+
+    quantity.setFont(new java.awt.Font("Liberation Sans", 0, 17)); // NOI18N
+    quantity.setText("Quantity");
+
+    price.setFont(new java.awt.Font("Liberation Sans", 0, 17)); // NOI18N
+    price.setText("Price");
+
+    priceItem.setText("0.00");
+
+    total.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+    total.setText("0.00");
+
+    quantitySelector.addChangeListener(new ChangeListener() {
+      public void stateChanged(ChangeEvent ce) {
+        int quantity = (int) quantitySelector.getValue();
+        int itemIndex = itemDrop.getSelectedIndex();
+        float price = quantity * itemPrices[itemIndex];
+        priceItem.setText(String.valueOf(price));
+      }
+    });
+
+    itemsTable.setModel(new javax.swing.table.DefaultTableModel(
+        new Object[][] {
+        },
+        new String[] {
+            "ItemName", "Quantity", "Price"
+        }) {
+      Class[] types = new Class[] {
+          java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+      };
+
+      public Class getColumnClass(int columnIndex) {
+        return types[columnIndex];
+      }
+    });
+    // itemsTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+    itemsTable.setShowGrid(true);
+    itemsTable.setColumnSelectionAllowed(false);
+    jScrollPane1.setViewportView(itemsTable);
+
+    addBtn.setBackground(new java.awt.Color(0, 0, 0));
+    addBtn.setForeground(new java.awt.Color(255, 255, 255));
+    addBtn.setText("Add Item");
+    addBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        String item = (String) itemDrop.getSelectedItem();
+        int quantity = (int) quantitySelector.getValue();
+        float cost = Float.parseFloat(priceItem.getText());
+        DefaultTableModel model = (DefaultTableModel) itemsTable.getModel();
+        model.addRow(new Object[] { item, quantity, cost });
+        float totalCost = Float.parseFloat(total.getText());
+        totalCost += cost;
+        total.setText(String.valueOf(totalCost));
+        int itemIDindex = itemDrop.getSelectedIndex();
+        int itemID = itemId.get(itemIDindex);
+        // int itemID = itemId[itemDrop.getSelectedIndex()];
+        String queryString = "insert into Checkout values(" + billId + ", " + itemID + ", " + cost + ", " + quantity
+            + ")";
+        finalQueries.add(queryString);
+      }
+    });
+
+    backBtn.setBackground(new java.awt.Color(0, 0, 0));
+    backBtn.setForeground(new java.awt.Color(255, 255, 255));
+    backBtn.setText("Back");
+    backBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        // do something
+      }
+    });
+
+    cart.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+    cart.setText("CART");
+
+    item1.setText("Lays");
+
+    grandTotal.setFont(new java.awt.Font("Liberation Sans", 1, 20)); // NOI18N
+    grandTotal.setText("GRAND TOTAL");
+
+    paymentDrop.setModel(
+        new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Credit Card", "Debit Card", "Online Payment" }));
+    paymentDrop.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+      }
+    });
+
+    paymentLabel.setText("Select Payment Method");
+
+    confirmBtn.setBackground(new java.awt.Color(0, 0, 0));
+    confirmBtn.setForeground(new java.awt.Color(255, 255, 255));
+    confirmBtn.setText("Confirm Order");
+    confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+          Conn c = new Conn();
+          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+          LocalDateTime now = LocalDateTime.now();
+          c.s.execute("insert into Bills values(" + billId + ", '" + dtf.format(now) + "', '"
+              + paymentDrop.getSelectedItem() + "')");
+          for (String query : finalQueries) {
+            c.s.execute(query);
+          }
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(null, "Order Successfull");
+        setVisible(false);
+      }
+    });
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(paymentLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(paymentDrop, javax.swing.GroupLayout.PREFERRED_SIZE,
+                            javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143,
+                            javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cart, javax.swing.GroupLayout.PREFERRED_SIZE, 83,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(11, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(makeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 223,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, 95,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 73,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 73,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(itemDrop, 0, 131, Short.MAX_VALUE)
+                                    .addComponent(quantitySelector)
+                                    .addComponent(priceItem, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(addBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(grandTotal)
+                                .addGap(35, 35, 35)
+                                .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 79,
+                                    javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                            javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backBtn)
+                        .addGap(28, 28, 28)))));
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(cart, javax.swing.GroupLayout.PREFERRED_SIZE, 29,
+                            javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backBtn)
+                            .addComponent(makeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(select)
+                            .addComponent(itemDrop, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(quantity)
+                            .addComponent(quantitySelector, javax.swing.GroupLayout.PREFERRED_SIZE, 21,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(price)
+                            .addComponent(priceItem))
+                        .addGap(18, 18, 18)
+                        .addComponent(addBtn)
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(grandTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 46,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 46,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(paymentDrop, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(paymentLabel)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313,
+                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE)));
+
+    pack();
+  }// </editor-fold>
+
+  private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    // TODO add your handling code here:
   }
 
-  public static void main(String[] args) {
-    new MakeOrder();
+  /**
+   * @param args the command line arguments
+   */
+  public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+    // (optional) ">
+    /*
+     * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+     * look and feel.
+     * For details see
+     * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+     */
+    try {
+      for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+          javax.swing.UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    } catch (ClassNotFoundException ex) {
+      java.util.logging.Logger.getLogger(MakeOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+      java.util.logging.Logger.getLogger(MakeOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+      java.util.logging.Logger.getLogger(MakeOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+      java.util.logging.Logger.getLogger(MakeOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+    // </editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+      public void run() {
+        new MakeOrder().setVisible(true);
+      }
+    });
   }
+
+  // Variables declaration - do not modify
+  private javax.swing.JButton addBtn;
+  private javax.swing.JLabel cart;
+  private javax.swing.JLabel grandTotal;
+  private javax.swing.JLabel item1;
+  private javax.swing.JComboBox<String> itemDrop;
+  private javax.swing.JLabel makeOrder;
+  private javax.swing.JLabel price;
+  private javax.swing.JLabel priceItem;
+  private javax.swing.JLabel quantity;
+  private javax.swing.JSpinner quantitySelector;
+  private javax.swing.JLabel select;
+  private javax.swing.JLabel total;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JTable itemsTable;
+  private String[] itemStrings;
+  private float[] itemPrices;
+  private javax.swing.JButton backBtn;
+  private javax.swing.JButton confirmBtn;
+  private javax.swing.JComboBox<String> paymentDrop;
+  private javax.swing.JLabel paymentLabel;
+  // End of variables declaration
 }

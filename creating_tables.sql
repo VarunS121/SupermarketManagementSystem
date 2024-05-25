@@ -1,5 +1,12 @@
-create database store;
-use store;
+--drop database if exists <previous database name>
+create database if not exists storev03;
+use storev03;
+
+-- Create Product Categories Table
+CREATE TABLE ProductCategories (
+	ProductName VARCHAR(100) PRIMARY KEY,
+    Category VARCHAR(100)
+);
 
 -- Create Products table
 CREATE TABLE Products (
@@ -7,14 +14,9 @@ CREATE TABLE Products (
     ProductName VARCHAR(100) NOT NULL,
     CostPrice DECIMAL(10, 2) NOT NULL,
     SellingPrice DECIMAL(10, 2) NOT NULL,
-    Discount DECIMAL(5, 2) NOT NULL
-);
-
---
-CREATE TABLE ProductCategories (
-	ProductID INT PRIMARY KEY,
-    Category VARCHAR(100),
-    FOREIGN KEY (ProductID) references Products(ProductID)
+    Quantity INT NOT NULL,
+    Discount DECIMAL(5, 2),
+    FOREIGN KEY (ProductName) references ProductCategories(ProductName)
 );
 
 -- Create Vendors table
@@ -27,16 +29,18 @@ CREATE TABLE Vendors (
 -- Create Orders table
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
-    Status ENUM('Pending', 'Shipped', 'Delivered', 'Cancelled') NOT NULL,
+    Status ENUM('In Progress', 'Pending', 'Shipped', 'Delivered', 'Cancelled') NOT NULL,
     OrderDate DATE NOT NULL
 );
+-- ALTER TABLE Orders MODIFY COLUMN Status ENUM('In Progress', 'Pending', 'Shipped', 'Delivered', 'Cancelled');
 
 -- Create Customers table
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
     CustomerName VARCHAR(100) NOT NULL,
-    EmailID VARCHAR(100) NOT NULL,
-    PhoneNumber VARCHAR(20)
+    EmailID VARCHAR(100),
+    PhoneNumber VARCHAR(20),
+    Password VARCHAR(64) NOT NULL
 );
 
 -- Create Employees table
@@ -44,7 +48,7 @@ CREATE TABLE Employees (
     EmployeeID INT PRIMARY KEY,
     EmployeeName VARCHAR(100) NOT NULL,
     UserID VARCHAR(50) NOT NULL,
-    Password VARCHAR(100) NOT NULL,
+    Password VARCHAR(64) NOT NULL,
     Role VARCHAR(50) NOT NULL
 );
 
@@ -81,7 +85,7 @@ CREATE TABLE OrderDetails (
 -- Create Transactions table (Relationship table)
 CREATE TABLE Transactions (
     BillID INT PRIMARY KEY,
-    PromotionID INT NOT NULL,
+    PromotionID INT,
     CustomerID INT NOT NULL,
     EmployeeID INT NOT NULL,
     FOREIGN KEY (PromotionID) REFERENCES Promotions(PromotionID),
@@ -100,4 +104,3 @@ CREATE TABLE Checkout (
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
     FOREIGN KEY (BillID) REFERENCES Bills(BillID)
 );
-

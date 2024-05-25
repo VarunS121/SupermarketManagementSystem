@@ -1,18 +1,21 @@
-## Getting Started
+# Supermarket Management System
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is a project that combines JavaSwing, JavaFX, and Java SQL to create a desktop application with a graphical user interface and a database backend.
 
-## Folder Structure
+## Prerequisites
 
-The workspace contains two folders by default, where:
+- Java Development Kit (JDK) 8 or later
+- A compatible Java Integrated Development Environment (IDE), such as Eclipse or IntelliJ IDE
+- MySQL Java Connector 8.0.28 (mysql-connector-java-8.0.28.jar)
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Dependencies
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- JavaSwing (included in the JDK)
+- JavaFX (separate library)
+- Java SQL (included in the JDK)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Project Structure
 
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- `src/application/`: Contains the JavaFX controller classes for handling UI events and logic and the various Frames implemented using Swing.
+- `src/FXML/`: Contains the various FXML files for defining the user interface layouts.
+- `src/Stylesheet/`:  Contains the CSS files for styling the user interface.
